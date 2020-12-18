@@ -52,20 +52,28 @@ public class SignUpController implements Initializable{
     public void signUp(ActionEvent event) throws Exception{
     	conn = MySqlConnection.ConnectDb();
     	String signUpSQL = "insert into users(username, password) values(?, ?)";
-		try {
-			ps = conn.prepareStatement(signUpSQL);
-			ps.setString(1, txt_username.getText());
-			ps.setString(2, txt_password.getText());
-			ps.execute();
-			
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("/login/Login.FXML"));
-			signUpPane.getChildren().setAll(pane);	
-		}
-		catch(Exception e) {
+    	if (txt_username.getText().equals("") && txt_password.getText().equals("")) {  
 			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setContentText("Fields cannot be empty.");
 			alertError.showAndWait();
-		}
-	}
+    	}
+    	else {
+    		try {
+    			ps = conn.prepareStatement(signUpSQL);
+    			ps.setString(1, txt_username.getText());
+    			ps.setString(2, txt_password.getText());
+    			ps.execute();
+
+    			AnchorPane pane = FXMLLoader.load(getClass().getResource("/login/Login.FXML"));
+    			signUpPane.getChildren().setAll(pane);	
+    		}
+    		catch(Exception e) {
+    			Alert alertError = new Alert(AlertType.ERROR);
+    			alertError.setContentText("Username already exists. Please choose another username.");
+    			alertError.showAndWait();
+    		}
+    	}
+    }
     
     public void goToLogin(){
     	try {

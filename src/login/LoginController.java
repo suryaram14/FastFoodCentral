@@ -44,6 +44,7 @@ public class LoginController implements Initializable{
     	String loginSQL = "select * from users where username = ? and password = ?";
     	if (txt_username.getText().equals("") && txt_password.getText().equals("")) {  
 			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setContentText("Fields cannot be empty.");
 			alertError.showAndWait();
     	}
     	else {
@@ -54,12 +55,19 @@ public class LoginController implements Initializable{
     			rs = ps.executeQuery();
 
     			if(rs.next()) {
-    				Alert success = new Alert(AlertType.CONFIRMATION);
-    				success.showAndWait();
+    				AnchorPane pane = FXMLLoader.load(getClass().getResource("/application/Main.FXML"));
+    				loginPane.getChildren().setAll(pane);
+    			}
+    			
+    			else {
+    				Alert alertError = new Alert(AlertType.ERROR);
+        			alertError.setContentText("Username and/or password is wrong");
+        			alertError.showAndWait();
     			}
     		}
     		catch(Exception e) {
     			Alert alertError = new Alert(AlertType.ERROR);
+    			alertError.setContentText("Username or password is wrong");
     			alertError.showAndWait();
     		}
     	}
