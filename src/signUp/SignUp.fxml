@@ -14,12 +14,12 @@
       <PasswordField fx:id="txt_password" layoutX="228.0" layoutY="255.0" prefHeight="36.0" prefWidth="228.0" promptText="Enter password" style="-fx-background-color: d3d3d3;" />
       <Button fx:id="signUp_button" layoutX="299.0" layoutY="306.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Sign up" />
       <Button fx:id="login_button" layoutX="541.0" layoutY="38.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Login" />
-      <ImageView fx:id="imgMovie" fitHeight="86.0" fitWidth="208.0" layoutX="289.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: darken;">
+      <ImageView fx:id="imgMovie" fitHeight="86.0" fitWidth="208.0" layoutX="283.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@movie%20logo.png" />
+            <Image url="@food%20logo.PNG" />
          </image>
       </ImageView>
-      <TextField layoutX="238.0" layoutY="107.0" prefHeight="56.0" prefWidth="205.0" style="-fx-background-color: slategrey; -fx-blend-mode: darken;" text="Movie Review">
+      <TextField layoutX="224.0" layoutY="107.0" prefHeight="56.0" prefWidth="235.0" style="-fx-background-color: slategrey; -fx-blend-mode: darken;" text="Fast Food Central">
          <font>
             <Font size="26.0" />
          </font>
