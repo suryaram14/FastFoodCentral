@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class MySqlConnection {
 	Connection conn = null;
 	
@@ -20,4 +21,5 @@ public class MySqlConnection {
 			return null;
 		}
 	}
+	
 }

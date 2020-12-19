@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="508.0" prefWidth="946.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="homePane" prefHeight="508.0" prefWidth="946.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <Pane prefHeight="518.0" prefWidth="193.0" style="-fx-background-color: slategray;">
          <children>
@@ -23,14 +23,14 @@
                   <Image url="@food%20logo.PNG" />
                </image>
             </ImageView>
-            <TextField layoutX="24.0" layoutY="141.0" prefHeight="48.0" prefWidth="151.0" style="-fx-background-color: slategrey;" text="Fast Food Central">
+            <Label layoutX="24.0" layoutY="143.0" prefHeight="31.0" prefWidth="163.0" text="Fast Food Central">
                <font>
-                  <Font size="17.0" />
+                  <Font size="20.0" />
                </font>
-            </TextField>
+            </Label>
          </children>
       </Pane>
-      <AnchorPane fx:id="homePane" layoutX="193.0" prefHeight="517.0" prefWidth="753.0">
+      <AnchorPane layoutX="193.0" prefHeight="517.0" prefWidth="753.0">
          <children>
             <TabPane layoutY="44.0" prefHeight="474.0" prefWidth="753.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -61,9 +61,9 @@
                               <Label layoutX="109.0" layoutY="212.0" prefHeight="17.0" prefWidth="44.0" text="\$9.99" />
                               <Label layoutX="370.0" layoutY="212.0" text="\$8.99" />
                               <Label layoutX="597.0" layoutY="212.0" text="\$7.99" />
-                              <Button fx:id="meatP_button" layoutX="91.0" layoutY="373.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="pepporoniP_button" layoutX="338.0" layoutY="373.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="vegP_button" layoutX="580.0" layoutY="373.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="meatP_button" layoutX="91.0" layoutY="373.0" mnemonicParsing="false" onAction="#orderPizza" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="pepperoniP_button" layoutX="338.0" layoutY="373.0" mnemonicParsing="false" onAction="#orderPizza" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="vegP_button" layoutX="580.0" layoutY="373.0" mnemonicParsing="false" onAction="#orderPizza" style="-fx-background-color: lawngreen;" text="Place Order" />
                               <TextArea layoutX="23.0" layoutY="232.0" prefHeight="128.0" prefWidth="228.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Perfect choice for all meat lovers out &#10;there. Pizza comes with orginal crust,&#10;mozzarella cheese, and a combination&#10;of meats which include pepperoni,&#10;sausage, ham, and bacon!&#10;&#10;" />
                               <TextArea layoutX="270.0" layoutY="239.0" prefHeight="115.0" prefWidth="214.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Can't go wrong with the classic &#10;pepporoni on pizza. Served with thin&#10;crust along with freshly made &#10;mozzarella and pepporoni!&#10;&#10;" />
                               <TextArea layoutX="507.0" layoutY="232.0" prefHeight="130.0" prefWidth="239.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Perfect choice for all vegetarian &#10;people. Pizza is served with garlic &#10;crust, mozzarella, and a heap of&#10;vegetables which include onions, green&#10;peppers, tomatoes, and mushrooms&#10;&#10;&#10;" />
@@ -101,9 +101,9 @@
                               <TextArea layoutX="10.0" layoutY="246.0" prefHeight="127.0" prefWidth="234.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Perfect choice for all meat lovers out &#10;there. Burger comes with brioche buns,&#10;2x2 layer of beef patties and american&#10;cheese, pickles, ranch, and thousand&#10;island sauce!&#10;&#10;&#10;" />
                               <TextArea layoutX="263.0" layoutY="245.0" prefHeight="128.0" prefWidth="228.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Perfect choice for people who love &#10;chicken. Burger comes with brioche &#10;buns sprinkled with seeds, chicken&#10;patty, guacamole, ranch, cheese, &#10;arugula, and tomatoes!&#10;&#10;" />
                               <TextArea layoutX="506.0" layoutY="245.0" prefHeight="128.0" prefWidth="228.0" style="-fx-blend-mode: darken; -fx-background-color: dodgerblue;" text="Perfect choice for vegetarian people.&#10;Burger comes with brioche buns,&#10;black bean patty, lettuce, ranch, onions,&#10;and tomatoes!&#10;&#10;" />
-                              <Button fx:id="classicB_button" layoutX="88.0" layoutY="385.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="chickenB_button" layoutX="336.0" layoutY="385.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="vegB_button" layoutX="594.0" layoutY="385.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="classicB_button" layoutX="88.0" layoutY="385.0" mnemonicParsing="false" onAction="#orderBurger" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="chickenB_button" layoutX="336.0" layoutY="385.0" mnemonicParsing="false" onAction="#orderBurger" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="vegB_button" layoutX="594.0" layoutY="385.0" mnemonicParsing="false" onAction="#orderBurger" style="-fx-background-color: lawngreen;" text="Place Order" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -135,9 +135,9 @@
                               <Label layoutX="346.0" layoutY="234.0" text="\$3.99" />
                               <Label layoutX="564.0" layoutY="206.0" text="Chocolate Milkshake" />
                               <Label layoutX="605.0" layoutY="234.0" text="\$3.99" />
-                              <Button fx:id="vanilla_button" layoutX="75.0" layoutY="309.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="strawberry_button" layoutX="322.0" layoutY="309.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
-                              <Button fx:id="chocolate_button" layoutX="579.0" layoutY="309.0" mnemonicParsing="false" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="vanilla_button" layoutX="75.0" layoutY="309.0" mnemonicParsing="false" onAction="#orderDrinks" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="strawberry_button" layoutX="322.0" layoutY="309.0" mnemonicParsing="false" onAction="#orderDrinks" style="-fx-background-color: lawngreen;" text="Place Order" />
+                              <Button fx:id="chocolate_button" layoutX="579.0" layoutY="309.0" mnemonicParsing="false" onAction="#orderDrinks" style="-fx-background-color: lawngreen;" text="Place Order" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -146,20 +146,22 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="388.0" prefWidth="753.0">
+                              <Button layoutX="623.0" layoutY="397.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: lawngreen;" text="Confirm Order" />
+                              <Button layoutX="545.0" layoutY="397.0" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: yellow;" text="Clear" />
+                              <Label layoutX="606.0" layoutY="355.0" prefHeight="31.0" prefWidth="35.0" text="Total" />
+                              <TextField fx:id="total" layoutX="644.0" layoutY="358.0" prefHeight="25.0" prefWidth="101.0" text="\$" />
+                              <VBox prefHeight="346.0" prefWidth="753.0">
                                  <children>
-                                    <TextArea fx:id="txt_cart" prefHeight="386.0" prefWidth="753.0" />
+                                    <TextArea fx:id="txt_cart" prefHeight="351.0" prefWidth="753.0" />
                                  </children>
                               </VBox>
-                              <Button layoutX="623.0" layoutY="397.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: lawngreen;" text="Confirm Order" />
-                              <Button layoutX="545.0" layoutY="397.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: yellow;" text="Reset" />
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="logout_button" layoutX="626.0" layoutY="6.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: dodgerblue;" text="Logout" />
+            <Button fx:id="logout_button" layoutX="626.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: dodgerblue;" text="Logout" />
          </children>
       </AnchorPane>
    </children>
