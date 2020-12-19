@@ -2,9 +2,17 @@ package application;
 
 public class Pizza {
 	private double price;
+	private int selection;
 	
-	public Pizza(double price) {
-		this.price = price;
+	public Pizza() {
+	}
+
+	public int getSelection() {
+		return selection;
+	}
+
+	public void setSelection(int selection) {
+		this.selection = selection;
 	}
 
 	public double getPrice() {
