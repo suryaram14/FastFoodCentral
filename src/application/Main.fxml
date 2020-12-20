@@ -152,7 +152,7 @@
                                  </children>
                               </VBox>
                               <Button layoutX="494.0" layoutY="404.0" mnemonicParsing="false" onAction="#readOrder" style="-fx-background-color: yellow;" text="Calculate total price" />
-                              <Button layoutX="630.0" layoutY="404.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: lawngreen;" text="Confirm Order" />
+                              <Button layoutX="630.0" layoutY="404.0" mnemonicParsing="false" onAction="#proceed" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: lawngreen;" text="Proceed" />
                               <Label layoutX="555.0" layoutY="365.0" text="Total Price to Pay:  $" />
                               <Button layoutX="383.0" layoutY="404.0" mnemonicParsing="false" onAction="#clear" prefHeight="24.0" prefWidth="94.0" style="-fx-background-color: salmon;" text="Clear Order" />
                               <TextField fx:id="total" layoutX="670.0" layoutY="361.0" prefHeight="25.0" prefWidth="63.0" promptText="Total" />

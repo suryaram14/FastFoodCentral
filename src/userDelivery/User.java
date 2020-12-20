@@ -13,7 +13,7 @@ public class User extends Application{
 		// TODO Auto-generated method stub
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/userDelivery/User.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,629,422);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

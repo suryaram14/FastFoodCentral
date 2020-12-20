@@ -15,6 +15,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -79,7 +81,7 @@ public class MainController implements Initializable{
 			mainStage.close();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/login/Login.FXML"));
 			AnchorPane pane = loader.load();
-			Scene scene = new Scene(pane, 700, 400);
+			Scene scene = new Scene(pane, 663, 473);
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.show();
@@ -297,24 +299,41 @@ public class MainController implements Initializable{
     
     @FXML 
     public void clear() {
-    	Alert success = new Alert(AlertType.CONFIRMATION);
-    	success.setContentText("Items deleted");
-    	success.showAndWait();
-    	totalPrice = 0.0;
-    	txt_cart.clear();
-    	total.clear();
+    	if(txt_cart.getText().equals("")) {
+    		Alert error = new Alert(AlertType.ERROR);
+			error.setContentText("No items added to cart");
+	    	error.showAndWait();
+    	}
+    	else {
+    		Alert success = new Alert(AlertType.CONFIRMATION);
+    		success.setContentText("Items deleted");
+    		success.showAndWait();
+    		totalPrice = 0.0;
+    		txt_cart.clear();
+    		total.clear();
+    	}
     }
     
     @FXML
-    public void confirmOrder() throws IOException {	
+    public void proceed(ActionEvent event) throws IOException {	
 		if(total.getText().equals("")) {
 			Alert error = new Alert(AlertType.ERROR);
 			error.setContentText("Total not calculated");
 	    	error.showAndWait();
 		}
+		else if(totalPrice == 0.0) {
+			Alert error = new Alert(AlertType.ERROR);
+			error.setContentText("No items selected");
+	    	error.showAndWait();
+		}
 		else {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("/userDelivery/User.FXML"));
-			homePane.getChildren().setAll(pane);
+			Parent pane = FXMLLoader.load(getClass().getResource("/userDelivery/User.FXML"));
+			Scene scene = new Scene(pane);
+			Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.setHeight(422);
+			stage.setWidth(629);
+			stage.show();
 			txt_cart.clear();
 			total.clear();
 		}

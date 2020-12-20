@@ -12,7 +12,7 @@ public class SignUp extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/signUp/SignUp.fxml"));
-			Scene scene = new Scene(root,900,900);
+			Scene scene = new Scene(root,663,473);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

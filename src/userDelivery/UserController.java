@@ -6,14 +6,19 @@ import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 import connection.MySqlConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class UserController implements Initializable{
 	
@@ -36,7 +41,7 @@ public class UserController implements Initializable{
     PreparedStatement ps = null;
     
     @FXML
-    public void confirmOrder() {
+    public void confirmOrder(ActionEvent event) {
     	conn = MySqlConnection.ConnectDb();
     	String delivery = "insert into delivery(name, phone_number, address, notes) values(?,?,?,?)";
     	if (txt_name.getText().equals("") || txt_phoneNumber.getText().equals("") || txt_address.getText().equals("")) {  
@@ -53,12 +58,17 @@ public class UserController implements Initializable{
     			ps.setString(4, txt_notes.getText());
     			ps.execute();
 
-    			Alert success = new Alert(AlertType.ERROR);
+    			Alert success = new Alert(AlertType.CONFIRMATION);
     			success.setContentText("Order confirmed");
     			success.showAndWait();
     			
-    			AnchorPane pane = FXMLLoader.load(getClass().getResource("/login/Login.FXML"));
-    			UserPane.getChildren().setAll(pane);
+    			Parent pane = FXMLLoader.load(getClass().getResource("/application/Main.FXML"));
+    			Scene scene = new Scene(pane);
+				Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+				stage.setScene(scene);
+				stage.setHeight(518);
+				stage.setWidth(946);
+				stage.show();
     			}
     		catch(Exception e) {
     			Alert alertError = new Alert(AlertType.ERROR);
