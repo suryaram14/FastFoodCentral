@@ -2,16 +2,25 @@ package application;
 
 public class Burger {
 	private double price;
-	private int selection;
+	private String selection;
+	private int id;
 	
 	public Burger() {
 	}
 	
-	public int getSelection() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getSelection() {
 		return selection;
 	}
 
-	public void setSelection(int selection) {
+	public void setSelection(String selection) {
 		this.selection = selection;
 	}
 	

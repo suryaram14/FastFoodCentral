@@ -1,16 +1,13 @@
 package application;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.Connection;
-import java.util.InputMismatchException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import connection.MySqlConnection;
 import javafx.event.ActionEvent;
@@ -67,8 +64,12 @@ public class MainController implements Initializable{
     
     @FXML
     private TextField total;
-    
+
+	
     Connection conn = null;
+    Statement statement = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
     double totalPrice = 0.0;
     
     @FXML
@@ -96,9 +97,10 @@ public class MainController implements Initializable{
     	EventHandler<ActionEvent> eventClassic = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	burger.setSelection(1);
+            	burger.setId(4);
+            	burger.setSelection("Classic Burger");
             	burger.setPrice(10.99);
-                txt_cart.appendText("Classic Burger" + " $" + burger.getPrice() + "\n"); 
+                txt_cart.appendText(burger.getSelection() + " $" + burger.getPrice() + "\n"); 
                 totalPrice += burger.getPrice();
                 writeBurgerOrder(burger);
             } 
@@ -109,9 +111,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventChicken = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	burger.setSelection(2);
+            	burger.setId(5);
+            	burger.setSelection("Chicken Burger");
             	burger.setPrice(11.99);
-                txt_cart.appendText("Chicken Burger" + " $" + burger.getPrice() + "\n"); 
+                txt_cart.appendText(burger.getSelection() + " $" + burger.getPrice() + "\n"); 
                 totalPrice += burger.getPrice();
                 writeBurgerOrder(burger);
             } 
@@ -122,9 +125,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventVeggie = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	burger.setSelection(3);
+            	burger.setId(6);
+            	burger.setSelection("Veggie Burger");
             	burger.setPrice(9.99);
-                txt_cart.appendText("Veggie Burger" + "$" + burger.getPrice() + "\n"); 
+                txt_cart.appendText(burger.getSelection() + "$" + burger.getPrice() + "\n"); 
                 totalPrice += burger.getPrice();
                 writeBurgerOrder(burger);
             } 
@@ -140,9 +144,10 @@ public class MainController implements Initializable{
     	EventHandler<ActionEvent> eventVanilla = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	drinks.setSelection(4);
+            	drinks.setId(7);
+            	drinks.setSelection("Vanilla Milkshake");
             	drinks.setPrice(3.99);
-                txt_cart.appendText("Vanilla Milkshake" + " $" + drinks.getPrice() + "\n"); 
+                txt_cart.appendText(drinks.getSelection() + " $" + drinks.getPrice() + "\n"); 
                 totalPrice += drinks.getPrice();
                 writeDrinksOrder(drinks);
             } 
@@ -153,9 +158,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventStrawberry = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	drinks.setSelection(5);
+            	drinks.setId(8);
+            	drinks.setSelection("Strawberry Milkshake");
             	drinks.setPrice(3.99);
-                txt_cart.appendText("Strawberry Milkshake" + " $" + drinks.getPrice() + "\n"); 
+                txt_cart.appendText(drinks.getSelection() + " $" + drinks.getPrice() + "\n"); 
                 totalPrice += drinks.getPrice();
                 writeDrinksOrder(drinks);
             } 
@@ -166,9 +172,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventChocolate = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	drinks.setSelection(6);
+            	drinks.setId(9);
+            	drinks.setSelection("Chocolate Milkshake");
             	drinks.setPrice(3.99);
-                txt_cart.appendText("Chocolate Milkshake"+ " $" + drinks.getPrice() + "\n"); 
+                txt_cart.appendText(drinks.getSelection() + " $" + drinks.getPrice() + "\n"); 
                 totalPrice += drinks.getPrice();
                 writeDrinksOrder(drinks);
             } 
@@ -184,9 +191,10 @@ public class MainController implements Initializable{
     	EventHandler<ActionEvent> eventMeat = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	pizza.setSelection(7);
+            	pizza.setId(1);
+            	pizza.setSelection("Meat Lovers Pizza");
             	pizza.setPrice(9.99);
-                txt_cart.appendText("Meat Lovers Pizza" + " $" + pizza.getPrice() + "\n");
+                txt_cart.appendText(pizza.getSelection() + " $" + pizza.getPrice() + "\n");
                 totalPrice += pizza.getPrice();
                 writePizzaOrder(pizza);
             } 
@@ -197,9 +205,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventPepperoni = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	pizza.setSelection(8);
+            	pizza.setId(2);
+            	pizza.setSelection("Pepperoni pizza");
             	pizza.setPrice(8.99);
-                txt_cart.appendText("Pepperoni pizza" + " $" + pizza.getPrice() + "\n");
+                txt_cart.appendText(pizza.getSelection() + " $" + pizza.getPrice() + "\n");
                 totalPrice += pizza.getPrice();
                 writePizzaOrder(pizza);
             } 
@@ -210,9 +219,10 @@ public class MainController implements Initializable{
         EventHandler<ActionEvent> eventVeggie = new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent e) 
             { 
-            	pizza.setSelection(9);
+            	pizza.setId(3);
+            	pizza.setSelection("Veggie Pizza");
             	pizza.setPrice(7.99);
-                txt_cart.appendText("Veggie Pizza" + " $" + pizza.getPrice() + "\n"); 
+                txt_cart.appendText(pizza.getSelection() + " $" + pizza.getPrice() + "\n"); 
                 totalPrice += pizza.getPrice();
                 writePizzaOrder(pizza);
             } 
@@ -220,110 +230,94 @@ public class MainController implements Initializable{
         vegP_button.setOnAction(eventVeggie);   
     }
 
-
-    public void writePizzaOrder(Pizza pizza) {	
-    	conn = MySqlConnection.ConnectDb();
-    	FileWriter file = null;
-    	PrintWriter print = null;
+    
+    public void writePizzaOrder(Pizza pizza) {
     	try {
-    		file = new FileWriter("src\\application\\order.txt", true);
-    		print = new PrintWriter(file);
-    		print.println(pizza.getSelection() + "   " +  "$" + pizza.getPrice());
-    		print.close();
-    	}
-    	catch(FileNotFoundException f) {
-  	   		f.printStackTrace();
-  	   	}
-    	catch(IOException e) {
-    		e.printStackTrace();
-    	}
-    	finally {
-    		if(print != null) {
-    			print.close();
-    		}
-    	}
-
+    		conn = MySqlConnection.ConnectDb();
+    		statement = conn.createStatement();
+    		String write = "insert into food(item_name, price) " +  "values (" + pizza.getId() + ", " + pizza.getPrice() + ")";
+    		System.out.println(write);
+    		statement.executeUpdate(write);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
     }
     
     
     public void writeBurgerOrder(Burger burger) {
-    	conn = MySqlConnection.ConnectDb();
-    	FileWriter file = null;
-    	PrintWriter print = null;
     	try {
-    		file = new FileWriter("src\\application\\order.txt", true);
-    		print = new PrintWriter(file);
-    		print.println(burger.getSelection() + "   " + burger.getPrice());
-    		print.close();
-  	   	}
-  	   	catch(FileNotFoundException f) {
-  	   		f.printStackTrace();
-  	   	}
-    	catch(IOException e) {
-    		e.printStackTrace();
-    	}
-    	finally {
-    		if(print != null) {
-    			print.close();
-    		}
-    	}
-
+    		conn = MySqlConnection.ConnectDb();
+    		statement = conn.createStatement();
+    		String write = "insert into food(item_name, price) " +  "values (" + burger.getId() + ", " + burger.getPrice() + ")";
+    		System.out.println(write);
+    		statement.executeUpdate(write);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
     }
-    
+
     
     public void writeDrinksOrder(Drinks drinks) {
-    	conn = MySqlConnection.ConnectDb();
-    	FileWriter file = null;
-    	PrintWriter print = null;
     	try {
-    		file = new FileWriter("src\\application\\order.txt", true);
-    		print = new PrintWriter(file);
-    		print.println(drinks.getSelection() + "   " + drinks.getPrice());
-    		print.close();
-    	}
-    	catch(FileNotFoundException f) {
-  	   		f.printStackTrace();
-  	   	}
-    	catch(IOException e) {
-    		e.printStackTrace();
-    	}
-    	finally {
-    		if(print != null) {
-    			print.close();
-    		}
-    	}
+    		conn = MySqlConnection.ConnectDb();
+    		statement = conn.createStatement();
+    		String write = "insert into food(item_name, price) " +  "values (" + drinks.getId() + ", " + drinks.getPrice() + ")";
+    		System.out.println(write);
+    		statement.executeUpdate(write);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}   	
     }
-    
-    
+
+    @FXML
     public void readOrder() {
-    	conn = MySqlConnection.ConnectDb();
-    	File file = null;
-    	Scanner sc = null;
-    	
     	try {
-    		file = new File("src\\application\\order.txt");
-    		sc = new Scanner(file);
+    		conn = MySqlConnection.ConnectDb();
+    		String read = "select * from food";
+    		ps = conn.prepareStatement(read);
+    		rs = ps.executeQuery();
     		
+    		while(rs.next()) {
+    			int order_id = rs.getInt(1);
+    			int item_name = rs.getInt(2);
+    			double price = rs.getDouble(3);
+    		}
     		String s = String.valueOf(totalPrice);
-    		total.appendText(s);
-		} 
-    	catch (FileNotFoundException e) {
+			total.appendText(s);
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	catch(InputMismatchException f) {
-    		System.out.println(f.getMessage());
-    	}
+    	
     }
     
     
-    @FXML
-    public void confirmOrder() {
+    @FXML 
+    public void clear() {
     	Alert success = new Alert(AlertType.CONFIRMATION);
-    	success.setContentText("Order confirmed");
+    	success.setContentText("Items deleted");
     	success.showAndWait();
+    	totalPrice = 0.0;
     	txt_cart.clear();
     	total.clear();
+    }
+    
+    @FXML
+    public void confirmOrder() throws IOException {	
+		if(total.getText().equals("")) {
+			Alert error = new Alert(AlertType.ERROR);
+			error.setContentText("Total not calculated");
+	    	error.showAndWait();
+		}
+		else {
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("/userDelivery/User.FXML"));
+			homePane.getChildren().setAll(pane);
+			txt_cart.clear();
+			total.clear();
+		}
     }
     
     

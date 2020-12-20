@@ -48,7 +48,7 @@ public class SignUpController implements Initializable{
     public void signUp(ActionEvent event) throws Exception{
     	conn = MySqlConnection.ConnectDb();
     	String signUpSQL = "insert into users(username, password) values(?, ?)";
-    	if (txt_username.getText().equals("") && txt_password.getText().equals("")) {  
+    	if (txt_username.getText().equals("") || txt_password.getText().equals("")) {  
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setContentText("Fields cannot be empty.");
 			alertError.showAndWait();
