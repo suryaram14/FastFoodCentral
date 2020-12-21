@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-
+// opens up window based on settings from Main Controller
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {

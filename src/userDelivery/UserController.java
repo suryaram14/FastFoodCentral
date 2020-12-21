@@ -21,6 +21,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class UserController implements Initializable{
+	// variables initialized in fxml file
+	// variables and onAction can be found in User.fxml file
 	
 	@FXML
     private AnchorPane UserPane;
@@ -37,9 +39,18 @@ public class UserController implements Initializable{
     @FXML
     private TextArea txt_notes;
 	
+    // variables to connect with back end database to store and retrieve info
     Connection conn = null;
     PreparedStatement ps = null;
     
+    
+    // method for user to confirm their order
+    // connection to database
+    // sql statement to insert user details provided into 'delivery' database
+    // if name, phone number, or address fields are empty, error message pops up
+    // else, prepared statment is used to set details in 'delivery' database
+    // if fields are all filled properly, confirmation message pops up
+    // user is then rerouted to Main.FXML once order is confirmed
     @FXML
     public void confirmOrder(ActionEvent event) {
     	conn = MySqlConnection.ConnectDb();

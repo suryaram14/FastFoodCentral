@@ -27,6 +27,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable{
+	// variables initialized in fxml file
+	// variables and onAction can be found in Main.fxml file
 	
 	@FXML
     private AnchorPane homePane;
@@ -67,13 +69,20 @@ public class MainController implements Initializable{
     @FXML
     private TextField total;
 
-	
+	// variables to connect with back end database to store and retrieve info
     Connection conn = null;
     Statement statement = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    
+    // variable initialized to get total price of items ordered
     double totalPrice = 0.0;
     
+    
+    // method for user to logout of account after ordering food
+    // Once logout button is pressed on top right
+    // controller reroutes user to the Login.FXML file where 
+    // they would have to login again to order food
     @FXML
     public void logout() {
     	try {
@@ -91,6 +100,13 @@ public class MainController implements Initializable{
 		}
     }
     
+    // method for user to order burger
+    // Used tab pane to separate burgers, pizza, and drinks
+    // connection to database
+    // create a new object of Burger
+    // set Id, selection name, and price of each burger
+    // EventHandler initialized to each of the 3 options provided - one for classic, chicken, and veggie
+    // every time 'place order' is clicked on, cart is updated and order is written to mysql database depending on user selection
     
     @FXML
     public void orderBurger() {
@@ -139,6 +155,13 @@ public class MainController implements Initializable{
     }
 
     
+    // method for user to order drinks
+    // Used tab pane to separate burgers, pizza, and drinks
+    // connection to database
+    // create a new object of Drinks
+    // set Id, selection name, and price of each drink
+    // EventHandler initialized to each of the 3 options provided - one for vanilla, strawberry, and chocolate
+    // every time 'place order' is clicked on, cart is updated and order is written to mysql database depending on user selection
     @FXML
     public void orderDrinks() {
     	conn = MySqlConnection.ConnectDb();
@@ -186,6 +209,13 @@ public class MainController implements Initializable{
     }
 
     
+    // method for user to order pizza
+    // Used tab pane to separate burgers, pizza, and drinks
+    // connection to database
+    // create a new object of Pizza
+    // set Id, selection name, and price of each pizza
+    // EventHandler initialized to each of the 3 options provided - one for meat lovers, pepperoni, and veggie
+    // every time 'place order' is clicked on, cart is updated and order is written to mysql database depending on user selection
     @FXML
     public void orderPizza() {
     	conn = MySqlConnection.ConnectDb();
@@ -233,6 +263,10 @@ public class MainController implements Initializable{
     }
 
     
+    // helper method used in orderPizza()
+    // method connects to database
+    // sql statement to update 'food' database based on the pizza item selected
+    // database stores orders for users
     public void writePizzaOrder(Pizza pizza) {
     	try {
     		conn = MySqlConnection.ConnectDb();
@@ -247,6 +281,10 @@ public class MainController implements Initializable{
     }
     
     
+    // helper method used in orderBurger()
+    // method connects to database
+    // sql statement to update 'food' database based on the burger item selected
+    // database stores orders per each user
     public void writeBurgerOrder(Burger burger) {
     	try {
     		conn = MySqlConnection.ConnectDb();
@@ -261,6 +299,10 @@ public class MainController implements Initializable{
     }
 
     
+    // helper method used in orderDrinks()
+    // method connects to database
+    // sql statement to update 'food' database based on the drink item selected
+    // database stores orders per each user
     public void writeDrinksOrder(Drinks drinks) {
     	try {
     		conn = MySqlConnection.ConnectDb();
@@ -274,6 +316,12 @@ public class MainController implements Initializable{
 		}   	
     }
 
+    
+    // method to read orders database
+    // method writeBurgerOrder(), writeDrinksOrder(), writePizzaOrder() all inputs data into 'food' table
+    // this method connects to the database and reads the order placed
+    // once read, the cart updates and users can see what they ordered in the cart tab
+    // total price text field also given for users to see their total amount they need to pay
     @FXML
     public void readOrder() {
     	try {
@@ -297,6 +345,9 @@ public class MainController implements Initializable{
     }
     
     
+    // method for users to clear their cart if they want to delete their order
+    // if cart is empty, error message pops up
+    // else all the parameters (total price, cart, total) are deleted and reset
     @FXML 
     public void clear() {
     	if(txt_cart.getText().equals("")) {
@@ -314,6 +365,11 @@ public class MainController implements Initializable{
     	}
     }
     
+    
+    // method for users to proceed to input detials once done with order
+    // if total price is not calculated or nothing is added into cart, error messages pop up
+    // else, user is redirected to User.FXML page where they can input their name, phone number, address, and any notes they have
+    // cart, total, and total price clears every time an order is successful
     @FXML
     public void proceed(ActionEvent event) throws IOException {	
 		if(total.getText().equals("")) {
@@ -334,6 +390,7 @@ public class MainController implements Initializable{
 			stage.setHeight(422);
 			stage.setWidth(629);
 			stage.show();
+			totalPrice = 0.0;
 			txt_cart.clear();
 			total.clear();
 		}

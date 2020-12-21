@@ -24,6 +24,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController implements Initializable{
+	// variables initialized in fxml file
+	// variables and onAction can be found in Login.fxml file
 	@FXML
     private AnchorPane loginPane;
 	
@@ -39,10 +41,20 @@ public class LoginController implements Initializable{
     @FXML
     private Button signUp_button;
     
+    // variables to connect with back end database to store and retrieve info
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
+    
+    // method for users to login to order food
+    // user must sign up first for their details to work
+    // connection to database
+    // sql statement to read user_id, username and password details from user database
+    // if fields are empty, error message pops up
+    // else, use prepare statements to set username and password user inputs
+    // if login details match sign up details, reroute user to FastFoodCentral page
+    // if username or password is wrong, error message pops up in which user would need to retype their info
     public void login(ActionEvent event) throws Exception{
     	conn = MySqlConnection.ConnectDb();
     	String loginSQL = "select * from users where username = ? and password = ?";
@@ -76,13 +88,17 @@ public class LoginController implements Initializable{
     		}
     		catch(Exception e) {
     			Alert alertError = new Alert(AlertType.ERROR);
-    			alertError.setContentText("Username or password is wrong");
+    			alertError.setContentText("Username and/or password is wrong");
     			alertError.showAndWait();
     			System.out.println(e.getMessage());
     		}
     	}
     }
     
+    
+    // sign up button on top left
+    // if user has not signed up yet, they may go to sign up page by pressing on the signUp_button
+    // once button is pressed, user is rerouted to SignUp.FXML
     public void goToSignUp(ActionEvent event) throws Exception{
     	try {
 			AnchorPane pane = FXMLLoader.load(getClass().getResource("/signUp/SignUp.FXML"));

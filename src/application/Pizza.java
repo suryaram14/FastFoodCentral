@@ -1,13 +1,16 @@
 package application;
 
 public class Pizza {
+	// instance variables to set price, order selection, and id of the item ordered
 	private double price;
 	private String selection;
 	private int id;
-
+	
+	// constructor
 	public Pizza() {
 	}
 	
+	// getters and setters for variables
 	public int getId() {
 		return id;
 	}

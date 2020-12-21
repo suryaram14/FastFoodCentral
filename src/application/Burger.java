@@ -1,13 +1,16 @@
 package application;
 
 public class Burger {
+	// instance variables to set price, order selection, and id of the item ordered
 	private double price;
 	private String selection;
 	private int id;
 	
+	// constructor
 	public Burger() {
 	}
 	
+	// getters and setters for variables
 	public int getId() {
 		return id;
 	}

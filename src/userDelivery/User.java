@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// opens up window based on settings from User Controller
 public class User extends Application{
 
 	@Override
