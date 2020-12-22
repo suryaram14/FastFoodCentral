@@ -8,4 +8,12 @@ To run, database must be initialized in mysql and eclipse project must reference
 
 Database details are provided in account.sql
 
-*NOTE: Application will run as long as MySQL server is up and running. If server is not running, the application will not be able to read and change data accordingly
+*NOTE: Application will run as long as MySQL server is up and running. If server is not running, the application will not be able to read and change data accordingly. Make sure 
+to reference your own mysqlconnector file.
+
+
+
+
+
+# FastFoodCentral
+![Fast-food](https://user-images.githubusercontent.com/60376265/102942695-e5f20e00-446a-11eb-86c0-f5a5838358d4.gif)
